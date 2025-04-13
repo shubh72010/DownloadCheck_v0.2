@@ -13,16 +13,17 @@
         <input type="text" id="url" placeholder="Enter YouTube video URL" />
         <button onclick="downloadVideo()">Download</button>
     </div>
-
-    <!-- Disclaimer Section -->
-    <div class="disclaimer">
+<div class="disclaimer">
         <p>⚠️ Disclaimer: This tool is intended for personal use only. Please respect copyright laws and only download videos that you have permission to use.</p>
         <p>By using this service, you agree not to use it for any unlawful purpose.</p>
     </div>
+
+    <!-- Error Message Display -->
+    <div id="error-message" style="color: red; margin-top: 20px;"></div>
 </div>
 
 <script>
-  async function downloadVideo() {
+async function downloadVideo() {
     const url = document.getElementById('url').value;
     const response = await fetch('/download', {
         method: 'POST',
@@ -40,7 +41,8 @@
         a.click();
         window.URL.revokeObjectURL(videoUrl);
     } else {
-        alert('Error downloading video');
+        const errorData = await response.json();
+        document.getElementById('error-message').innerText = errorData.error;
     }
 }
 </script>
