@@ -1,101 +1,127 @@
-
-/* Reset Default Browser Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-  scroll-behavior: smooth;
-  transition: all 0.3s ease-in-out;
+:root {
+  --bg-light: #f9f9f9;
+  --bg-dark: #121212;
+  --text-light: #121212;
+  --text-dark: #f0f0f0;
+  --accent: #8b5cf6;
+  --glass-bg-light: rgba(255, 255, 255, 0.6);
+  --glass-bg-dark: rgba(30, 30, 30, 0.4);
+  --border-radius: 1.2rem;
+  --transition: 0.3s ease;
+  --blur: 12px;
 }
 
-/* Body Styling */
+[data-theme="dark"] {
+  --bg-light: #121212;
+  --text-light: #f0f0f0;
+}
+
 body {
-  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Purple gradient */
-  color: white;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.glass {
+  background: var(--glass-bg-light);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  backdrop-filter: blur(var(--blur));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  width: 360px;
   text-align: center;
+  transition: background var(--transition), color var(--transition);
 }
 
-/* Main Container */
-.container {
-  width: 90%;
-  max-width: 600px;
-  background: rgba(30, 30, 30, 0.8); /* Semi-transparent for tiles effect */
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  backdrop-filter: blur(10px); /* Optional for a trendy background effect */
+[data-theme="dark"] .glass {
+  background: var(--glass-bg-dark);
 }
 
-/* Header */
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-/* Input Section */
-.input-area {
-  display: flex;
-  border: 1px solid #444;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: border-color 0.3s;
-}
-
-.input-area:hover {
-  border-color: #ff4b2b;
+  margin-bottom: 1rem;
 }
 
 input {
-  flex: 1;
-  padding: 15px;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
   border: none;
-  outline: none;
-  font-size: 16px;
-  background: #2a2a2a;
-  color: white;
-  transition: background 0.3s;
+  border-radius: var(--border-radius);
+  background: rgba(255,255,255,0.3);
+  color: inherit;
+  font-size: 1rem;
+  backdrop-filter: blur(4px);
+  transition: box-shadow var(--transition);
 }
 
 input:focus {
-  background: #3a3a3a;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent);
 }
 
 button {
-  padding: 15px;
+  padding: 0.8rem 1.2rem;
+  background: var(--accent);
   border: none;
-  background: #ff4b2b;
-  color: white;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 16px;
-  border-radius: 0 10px 10px 0;
-  transition: background 0.3s;
+  position: relative;
+  transition: transform 0.1s ease;
 }
 
-button:hover {
-  background: #ff6a6a;
+button:active {
+  transform: scale(0.97);
 }
 
-/* Disclaimer Section */
+.spinner {
+  border: 3px solid #fff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+#theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
 .disclaimer {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: rgba(42, 42, 42, 0.8);
-  border-radius: 10px;
-  color: #ffcc00; /* visible text color */
-  font-size: 14px;
-  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 1.2rem;
+  opacity: 0.7;
 }
 
-/* Error Message Display */
-#error-message {
-  color: red;
-  margin-top: 20px;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
