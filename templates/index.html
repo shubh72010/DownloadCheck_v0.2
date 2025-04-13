@@ -1,51 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DownloadCheck</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Updated link -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DownloadCheck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #a259ff;
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #888;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 420px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      width: 100%;
+    }
+
+    button {
+      background-color: var(--accent);
+      color: #fff;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #9147f3;
+    }
+
+    .disclaimer {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+  <div class="container">
     <h1>DownloadCheck</h1>
-    <div class="input-area">
-        <input type="text" id="url" placeholder="Enter YouTube video URL" />
-        <button onclick="downloadVideo()">Download</button>
-    </div>
-
-    <div class="disclaimer">
-        <p>⚠️ Disclaimer: This tool is intended for personal use only. Please respect copyright laws and only download videos that you have permission to use.</p>
-        <p>By using this service, you agree not to use it for any unlawful purpose.</p>
-    </div>
-
-    <!-- Error Message Display -->
-    <div id="error-message" style="color: red; margin-top: 20px;"></div>
-</div>
-
-<script>
-async function downloadVideo() {
-    const url = document.getElementById('url').value;
-    const response = await fetch('/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
-    });
-
-    if (response.ok) {
-        const blob = await response.blob();
-        const a = document.createElement('a');
-        const videoUrl = window.URL.createObjectURL(blob);
-        a.href = videoUrl;
-        a.download = 'video.mp4';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(videoUrl);
-    } else {
-        const errorData = await response.json();
-        document.getElementById('error-message').innerText = errorData.error;
-    }
-}
-</script>
+    <input type="text" placeholder="Paste YouTube video URL" />
+    <button>Download</button>
+    <p class="disclaimer">
+      ⚠️ This tool is for personal use only. Respect copyright laws and only download videos you’re allowed to.<br /><br />
+      By using this service, you agree not to use it for any unlawful purpose.
+    </p>
+  </div>
 </body>
 </html>
