@@ -1,3 +1,4 @@
+
 /* Reset Default Browser Styles */
 * {
     margin: 0;
@@ -90,3 +91,4 @@ button:hover {
     color: #ffcc00; /* change color for visibility */
     font-size: 14px;
     text-align: center;
+}
