@@ -1,89 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DownloadCheck</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #a259ff;
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --muted: #888;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 1rem;
-    }
-
-    .container {
-      max-width: 420px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-    }
-
-    input[type="text"] {
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      outline: none;
-      width: 100%;
-    }
-
-    button {
-      background-color: var(--accent);
-      color: #fff;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    button:hover {
-      background-color: #9147f3;
-    }
-
-    .disclaimer {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>DownloadCheck</h1>
-    <input type="text" placeholder="Paste YouTube video URL" />
-    <button>Download</button>
+  <div class="container glass">
+    <div class="header">
+      <h1>DownloadCheck</h1>
+      <button id="theme-toggle" title="Toggle Dark Mode">☀️</button>
+    </div>
+    <input type="text" id="url" placeholder="Paste YouTube video URL" />
+    <button id="download-btn">
+      <span class="btn-text">Download</span>
+      <span class="spinner hidden"></span>
+    </button>
     <p class="disclaimer">
-      ⚠️ This tool is for personal use only. Respect copyright laws and only download videos you’re allowed to.<br /><br />
-      By using this service, you agree not to use it for any unlawful purpose.
+      ⚠️ This tool is for personal use only. Respect copyright laws.<br />
+      Don’t be shady — download responsibly.
     </p>
   </div>
+  <script src="/script.js"></script>
 </body>
 </html>
